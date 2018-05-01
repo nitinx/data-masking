@@ -1,0 +1,17 @@
+[
+	{
+		"filename": "sampledata.csv",
+		"delimiter": ",",
+		"header": "Yes",
+		"trailer": "No",
+		"field_count": 9,
+		"masking":
+			{
+				"fields":
+					[
+						{ "name": "street", "type": "Shuffle" },
+						{ "name": "city", "type": "Shuffle" }
+					]
+			}
+	}
+]
