@@ -1,17 +1,22 @@
 [
-	{
-		"filename": "sampledata.csv",
-		"delimiter": ",",
-		"header": "Yes",
-		"trailer": "No",
-		"field_count": 9,
-		"masking":
-			{
-				"fields":
-					[
-						{ "name": "street", "type": "Shuffle" },
-						{ "name": "city", "type": "Shuffle" }
-					]
-			}
-	}
+  {
+    "filename": "sampledata.csv",
+    "delimiter": ",",
+    "header": "Yes",
+    "trailer": "No",
+    "date_format": "MM/DD/YYYY",
+    "field_count": 9,
+    "masking":
+    {
+      "fields":
+      [
+        { "name": "street", "type": "Shuffle" },
+        { "name": "city", "type": "SubstitutionChar" },
+        { "name": "zip", "type": "Shuffle" },
+        { "name": "email", "type": "SubstitutionChar" },
+        { "name": "telno", "type": "SubstitutionChar" },
+        { "name": "ssn", "type": "SubstitutionChar" }
+      ]
+    }
+  }
 ]
