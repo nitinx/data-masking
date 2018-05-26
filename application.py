@@ -51,6 +51,6 @@ if __name__ == '__main__':
         # Read and Write Table Data
         Oracle = Oracle(source_name, schema)
         r = Oracle.get_column_attributes()
-        Oracle.mask_data(data, metadata_index, Oracle.get_column_count(), Oracle.get_record_count())
+        Oracle.mask_data(data, metadata_index, Oracle.get_column_count(), Oracle.get_record_count(data, metadata_index))
 
     print(strftime("%Y-%b-%d %H:%M:%S", gmtime()) + " | [main()] <END>")

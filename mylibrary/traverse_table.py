@@ -60,9 +60,10 @@ class Oracle:
                 log.debug(str(values[0]) + ' ' + values[1] + ' ' + values[2])
         return 0
 
-    def get_record_count(self):
+    def get_record_count(self, data, metadata_index):
         """Returns Table Record Count"""
-        query = 'SELECT count(*) from {schema}.{table}'.format(schema=self.schema, table=self.table)
+        query = 'SELECT count(*) from {schema}.{table} {filter}'.format(schema=self.schema, table=self.table,
+                                                                        filter=data[metadata_index]['filter'])
         db_cur_one.execute(query)
 
         for values in db_cur_one:
@@ -92,7 +93,8 @@ class Oracle:
             writer = csv.DictWriter(file_write, fieldnames=col_names_write, delimiter='|', quoting=csv.QUOTE_ALL)
             writer.writeheader()
 
-            query = 'SELECT * FROM {schema}.{table}'.format(schema=self.schema, table=self.table)
+            query = 'SELECT * FROM {schema}.{table} {filter}'.format(schema=self.schema, table=self.table,
+                                                                     filter=data[metadata_index]['filter'])
             db_cur_one.execute(query)
             row_write = {}
 

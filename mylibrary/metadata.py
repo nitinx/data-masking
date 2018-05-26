@@ -55,6 +55,7 @@ class Metadata:
                 else:
                     log.info('Table Name: ' + data[record]['tablename'])
                     log.info('Schema: ' + data[record]['schema'])
+                    log.info('Filter: ' + data[record]['filter'])
                     log.info('Column Count: ' + str(data[record]['column_count']))
 
 

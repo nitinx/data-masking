@@ -3,7 +3,7 @@
     "tablename": "zmt_collections",
     "schema": "PY",
     "column_count": 9,
-    "filter": "",
+    "filter": "WHERE PERIOD = '201805'",
     "masking":
     {
       "columns":
