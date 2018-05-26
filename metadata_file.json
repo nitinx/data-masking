@@ -1,11 +1,11 @@
 [
   {
-    "filename": "sampledata.csv",
+    "file_name": "sampledata.csv",
     "delimiter": ",",
-    "header": "Yes",
-    "trailer": "No",
+    "header_present": "Yes",
+    "header_type": "column_names",
+    "trailer_present": "Yes",
     "date_format": "MM/DD/YYYY",
-    "column_count": 9,
     "masking":
     {
       "columns":

@@ -1,8 +1,7 @@
 [
   {
-    "tablename": "zmt_collections",
+    "table_name": "zmt_collections",
     "schema": "PY",
-    "column_count": 9,
     "filter": "WHERE PERIOD = '201805'",
     "masking":
     {

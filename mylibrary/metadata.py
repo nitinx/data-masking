@@ -25,11 +25,11 @@ class Metadata:
 
             for record in range(len(data)):
                 if self.source_type == 'File':
-                    if data[record]['filename'] == self.source_name:
+                    if data[record]['file_name'] == self.source_name:
                         log.debug("get_metadata_index() | <END>")
                         return record
                     else:
-                        if data[record]['tablename'] == self.source_name:
+                        if data[record]['table_name'] == self.source_name:
                             log.debug("get_metadata_index() | <END>")
                             return record
 
@@ -47,17 +47,15 @@ class Metadata:
             for record in range(len(data)):
 
                 if self.source_type == 'File':
-                    log.info('File Name: ' + data[record]['filename'])
+                    log.info('File Name: ' + data[record]['file_name'])
                     log.info('Delimiter: ' + data[record]['delimiter'])
-                    log.info('Has Header: ' + data[record]['header'])
-                    log.info('Has Trailer: ' + data[record]['trailer'])
-                    log.info('Column Count: ' + str(data[record]['column_count']))
+                    log.info('Header Present: ' + data[record]['header_present'])
+                    log.info('Header Type: ' + data[record]['header_type'])
+                    log.info('Trailer Present: ' + data[record]['trailer_present'])
                 else:
-                    log.info('Table Name: ' + data[record]['tablename'])
+                    log.info('Table Name: ' + data[record]['table_name'])
                     log.info('Schema: ' + data[record]['schema'])
                     log.info('Filter: ' + data[record]['filter'])
-                    log.info('Column Count: ' + str(data[record]['column_count']))
-
 
                 for column in range(len(data[record]['masking']['columns'])):
                     log.info('\tColumn Name: ' + data[record]['masking']['columns'][column]['name'])

@@ -14,10 +14,10 @@ from time import gmtime, strftime
 
 log = logging.getLogger(__name__)
 
-#source_type = "File"
-#source_name = 'sampledata.csv'
-source_type = "Table"
-source_name = 'zmt_collections'
+source_type = "File"
+source_name = 'sampledata.csv'
+#source_type = "Table"
+#source_name = 'zmt_collections'
 schema = 'PY'
 
 if __name__ == '__main__':
@@ -46,11 +46,10 @@ if __name__ == '__main__':
     if source_type == 'File':
         # Read and Write Data File
         FileDelimited = FileDelimited(source_name)
-        FileDelimited.read_write_file(data, metadata_index, FileDelimited.record_count())
+        FileDelimited.mask_data(data, metadata_index, FileDelimited.record_count())
     else:
         # Read and Write Table Data
         Oracle = Oracle(source_name, schema)
-        r = Oracle.get_column_attributes()
-        Oracle.mask_data(data, metadata_index, Oracle.get_column_count(), Oracle.get_record_count(data, metadata_index))
+        Oracle.mask_data(data, metadata_index, Oracle.get_record_count(data, metadata_index))
 
     print(strftime("%Y-%b-%d %H:%M:%S", gmtime()) + " | [main()] <END>")
