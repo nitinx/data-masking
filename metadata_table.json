@@ -1,0 +1,16 @@
+[
+  {
+    "tablename": "zmt_collections",
+    "schema": "PY",
+    "column_count": 9,
+    "filter": "",
+    "masking":
+    {
+      "columns":
+      [
+        { "name": "COLLECTION_ID", "type": "Shuffle" },
+        { "name": "TITLE", "type": "SubstitutionChar" }
+      ]
+    }
+  }
+]

@@ -44,7 +44,7 @@ class Mask:
 
             value_msk += chr(value_asc)
 
-        log.info(value_org + ' --> ' + value_msk)
+        log.debug(value_org + ' --> ' + value_msk)
         log.debug("substitution_char() | <END>")
         return value_msk
 

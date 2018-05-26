@@ -5,10 +5,10 @@
     "header": "Yes",
     "trailer": "No",
     "date_format": "MM/DD/YYYY",
-    "field_count": 9,
+    "column_count": 9,
     "masking":
     {
-      "fields":
+      "columns":
       [
         { "name": "street", "type": "Shuffle" },
         { "name": "city", "type": "SubstitutionChar" },
