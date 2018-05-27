@@ -70,10 +70,19 @@ class FileDelimited:
                                             'SubstitutionChar':
                                         row_write[col_names[col]] = Mask.substitution_char(row_read[col_names[col]])
                     else:
-                        writer = csv.DictWriter(file_write, fieldnames=['T', '10'],
+                        # Special handling for trailer record
+                        col_names_trailer = []
+                        row_write = {}
+
+                        # Loop through trailer columns
+                        for col in range(int(data[metadata_index]['trailer_column_count'])):
+                            col_names_trailer.append(str(col))
+                            row_write[col_names_trailer[col]] = row_read[col_names[col]]
+
+                        # Reinitialize writer for trailer column names
+                        writer = csv.DictWriter(file_write, fieldnames=col_names_trailer,
                                                 delimiter=data[metadata_index]['delimiter'],
                                                 quoting=csv.QUOTE_NONE, extrasaction='ignore')
-                        row_write = {'T': 'T', '10': '10'}
 
                     log.debug(row_write)
                     writer.writerow(row_write)

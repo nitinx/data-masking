@@ -5,7 +5,10 @@
     "header_present": "Yes",
     "header_type": "column_names",
     "trailer_present": "Yes",
+    "trailer_column_count": "2",
     "date_format": "MM/DD/YYYY",
+    "mask_by_column_name": "Yes",
+    "mask_by_column_position": "No",
     "masking":
     {
       "columns":
