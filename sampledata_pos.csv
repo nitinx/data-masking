@@ -1,4 +1,4 @@
-recordno,street,city,zip,state,email,birth_date,telno,ssn
+H,2018-10-23
 1,3526 HIGH ST,SACRAMENTO,95838,CA,henry@gmail.com,05/21/1981,59-222,123-456-789
 2,51 OMAHA CT,SACRAMENTO,95823,CA,henry@gmail.com,05/21/1981,68212,123-456-789
 3,2796 BRANCH ST,SACRAMENTO,95815,CA,henry@gmail.com,05/21/1981,68880,123-456-789
@@ -9,4 +9,4 @@ recordno,street,city,zip,state,email,birth_date,telno,ssn
 8,2561 19TH AVE,SACRAMENTO,95820,CA,henry@gmail.com,05/21/1981,91002,GHX56789
 9,11150 TRINITY RIVER DR Unit 114,RANCHO CORDOVA,95670,CA,corbett@hotmail.com,05/21/1981,94905,GHX56789
 10,7325 10TH ST,RIO LINDA,95673,CA,henry@gmail.com,05/21/1981,98937,GHX56789
-T,10,HERE,THERE
+T,10
