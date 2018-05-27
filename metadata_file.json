@@ -3,7 +3,7 @@
     "file_name": "sampledata.csv",
     "delimiter": ",",
     "header_present": "Yes",
-    "header_type": "column_names",
+    "header_column_count": "2",
     "trailer_present": "Yes",
     "trailer_column_count": "2",
     "date_format": "MM/DD/YYYY",
@@ -13,12 +13,32 @@
     {
       "columns":
       [
-        { "name": "street", "type": "Shuffle" },
-        { "name": "city", "type": "SubstitutionChar" },
-        { "name": "zip", "type": "Shuffle" },
-        { "name": "email", "type": "SubstitutionChar" },
-        { "name": "telno", "type": "SubstitutionChar" },
-        { "name": "ssn", "type": "SubstitutionChar" }
+        { "name_or_pos": "street", "type": "Shuffle" },
+        { "name_or_pos": "city", "type": "SubstitutionChar" },
+        { "name_or_pos": "zip", "type": "Shuffle" },
+        { "name_or_pos": "email", "type": "SubstitutionChar" },
+        { "name_or_pos": "telno", "type": "SubstitutionChar" },
+        { "name_or_pos": "ssn", "type": "SubstitutionChar" }
+      ]
+    }
+  },
+  {
+    "file_name": "sampledata_pos.csv",
+    "delimiter": ",",
+    "header_present": "Yes",
+    "header_column_count": "2",
+    "trailer_present": "Yes",
+    "trailer_column_count": "2",
+    "date_format": "MM/DD/YYYY",
+    "mask_by_column_name": "No",
+    "mask_by_column_position": "Yes",
+    "masking":
+    {
+      "columns":
+      [
+        { "name_or_pos": "2", "type": "Shuffle" },
+        { "name_or_pos": "3", "type": "SubstitutionChar" },
+        { "name_or_pos": "6", "type": "Shuffle" }
       ]
     }
   }

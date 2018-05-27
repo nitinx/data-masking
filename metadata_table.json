@@ -7,8 +7,8 @@
     {
       "columns":
       [
-        { "name": "COLLECTION_ID", "type": "Shuffle" },
-        { "name": "TITLE", "type": "SubstitutionChar" }
+        { "name_or_pos": "COLLECTION_ID", "type": "Shuffle" },
+        { "name_or_pos": "TITLE", "type": "SubstitutionChar" }
       ]
     }
   }
