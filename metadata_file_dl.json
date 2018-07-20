@@ -13,12 +13,12 @@
     {
       "columns":
       [
-        { "name_or_pos": "street", "type": "Shuffle" },
-        { "name_or_pos": "city", "type": "SubstitutionChar" },
-        { "name_or_pos": "zip", "type": "Shuffle" },
-        { "name_or_pos": "email", "type": "SubstitutionChar" },
-        { "name_or_pos": "telno", "type": "SubstitutionChar" },
-        { "name_or_pos": "ssn", "type": "SubstitutionChar" }
+        { "name": "street", "position":0, "type": "Shuffle" },
+        { "name": "city", "position":0, "type": "SubstitutionChar" },
+        { "name": "zip", "position":0, "type": "ShuffleDet" },
+        { "name": "email", "position":0, "type": "SubstitutionChar" },
+        { "name": "telno", "position":0, "type": "SubstitutionChar" },
+        { "name": "ssn", "position":0, "type": "SubstitutionChar" }
       ]
     }
   },
@@ -36,9 +36,9 @@
     {
       "columns":
       [
-        { "name_or_pos": "2", "type": "Shuffle" },
-        { "name_or_pos": "3", "type": "SubstitutionChar" },
-        { "name_or_pos": "6", "type": "Shuffle" }
+        { "name": "", "position": "2", "type": "Shuffle" },
+        { "name": "", "position": "3", "type": "SubstitutionChar" },
+        { "name": "", "position": "6", "type": "Shuffle" }
       ]
     }
   }

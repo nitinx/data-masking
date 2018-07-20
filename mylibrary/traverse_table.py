@@ -126,9 +126,11 @@ class Oracle:
                     # Loop through masked columns
                     for col_mask in range(len(data[metadata_index]['masking']['columns'])):
                         if col_names_write[col_read] == \
-                                str.strip(str(data[metadata_index]['masking']['columns'][col_mask]['name_or_pos'])):
+                                str.strip(str(data[metadata_index]['masking']['columns'][col_mask]['name'])):
                             if data[metadata_index]['masking']['columns'][col_mask]['type'] == 'Shuffle':
                                 row_write[col_names_write[col_read]] = Mask.shuffle(col_value)
+                            elif data[metadata_index]['masking']['columns'][col_mask]['type'] == 'ShuffleDet':
+                                row_write[col_names_write[col_read]] = Mask.shuffle_det(col_value)
                             elif data[metadata_index]['masking']['columns'][col_mask]['type'] == 'SubstitutionChar':
                                 row_write[col_names_write[col_read]] = Mask.substitution_char(col_value)
 

@@ -24,7 +24,7 @@ class Metadata:
             data = json.load(meta_file)
 
             for record in range(len(data)):
-                if self.source_type == 'File':
+                if self.source_type == 'File_DL' or self.source_type == 'File_FW':
                     if data[record]['file_name'] == self.source_name:
                         log.debug("get_metadata_index() | <END>")
                         return record
@@ -36,7 +36,7 @@ class Metadata:
             log.debug("get_metadata_index() | <END>")
             return -1
 
-    def get_metadata(self):
+    def get_metadata(self, metadata_index):
         """Retrieves file metadata"""
         log.debug("get_metadata() | <START>")
 
@@ -46,22 +46,32 @@ class Metadata:
 
             for record in range(len(data)):
 
-                if self.source_type == 'File':
-                    log.info('File Name: ' + data[record]['file_name'])
-                    log.info('Delimiter: ' + data[record]['delimiter'])
-                    log.info('Header Present: ' + data[record]['header_present'])
-                    log.info('Header Column Count: ' + data[record]['header_column_count'])
-                    log.info('Trailer Present: ' + data[record]['trailer_present'])
-                    log.info('Trailer Column Count: ' + data[record]['trailer_column_count'])
-                    log.info('Mask By Column Name: ' + data[record]['mask_by_column_name'])
-                    log.info('Mask By Column Position: ' + data[record]['mask_by_column_position'])
-                else:
-                    log.info('Table Name: ' + data[record]['table_name'])
-                    log.info('Schema: ' + data[record]['schema'])
-                    log.info('Filter: ' + data[record]['filter'])
+                if record == metadata_index:
 
-                for column in range(len(data[record]['masking']['columns'])):
-                    log.info('\tColumn Name\Position: ' + data[record]['masking']['columns'][column]['name_or_pos'])
-                    log.info('\t\tMasking Type: ' + data[record]['masking']['columns'][column]['type'])
+                    if self.source_type == 'File_DL':
+                        log.info('File Name: ' + data[record]['file_name'])
+                        log.info('Delimiter: ' + data[record]['delimiter'])
+                        log.info('Header Present: ' + data[record]['header_present'])
+                        log.info('Header Column Count: ' + data[record]['header_column_count'])
+                        log.info('Trailer Present: ' + data[record]['trailer_present'])
+                        log.info('Trailer Column Count: ' + data[record]['trailer_column_count'])
+                        log.info('Mask By Column Name: ' + data[record]['mask_by_column_name'])
+                        log.info('Mask By Column Position: ' + data[record]['mask_by_column_position'])
+                    elif self.source_type == 'File_FW':
+                        log.info('File Name: ' + data[record]['file_name'])
+                        log.info('Header Present: ' + data[record]['header_present'])
+                        log.info('Header Column Count: ' + data[record]['header_column_count'])
+                        log.info('Trailer Present: ' + data[record]['trailer_present'])
+                        log.info('Trailer Column Count: ' + data[record]['trailer_column_count'])
+                    elif self.source_type == 'Table':
+                        log.info('Table Name: ' + data[record]['table_name'])
+                        log.info('Schema: ' + data[record]['schema'])
+                        log.info('Filter: ' + data[record]['filter'])
+
+                    for column in range(len(data[record]['masking']['columns'])):
+                        log.info('\tColumn Position: ' +
+                                 str(data[record]['masking']['columns'][column]['position_start']) + ' to ' +
+                                 str(data[record]['masking']['columns'][column]['position_end']))
+                        log.info('\t\tMasking Type: ' + data[record]['masking']['columns'][column]['type'])
             log.debug("get_metadata() | <START>")
             return data

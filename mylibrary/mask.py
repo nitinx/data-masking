@@ -49,13 +49,25 @@ class Mask:
         return value_msk
 
     def shuffle(self, value_org):
+        """Random Shuffle"""
+        log.debug("shuffle_random() | <START>")
+
+        shuffle_list = list(value_org)
+        random.shuffle(shuffle_list)
+        value_msk = ''.join(shuffle_list)
+
+        log.debug(value_org + ' --> ' + value_msk)
+        log.debug("shuffle_random() | <END>")
+        return value_msk
+
+    def shuffle_det(self, value_org):
         """Deterministic Shuffle"""
-        log.debug("shuffle() | <START>")
+        log.debug("shuffle_det() | <START>")
 
         shuffle_list = list(value_org)
         random.Random(4).shuffle(shuffle_list)
         value_msk = ''.join(shuffle_list)
 
         log.debug(value_org + ' --> ' + value_msk)
-        log.debug("shuffle() | <END>")
+        log.debug("shuffle_det() | <END>")
         return value_msk
