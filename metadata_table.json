@@ -11,5 +11,17 @@
         { "name": "TITLE", "position":0, "type": "SubstitutionChar" }
       ]
     }
+  },
+  {
+    "table_name": "data_masking",
+    "schema": "PY",
+    "filter": "",
+    "masking":
+    {
+      "columns":
+      [
+        { "name": "LOC_LOCALITY", "position":0, "type": "Shuffle" }
+      ]
+    }
   }
 ]

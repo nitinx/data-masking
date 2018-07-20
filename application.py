@@ -10,18 +10,18 @@ import logging
 from mylibrary.metadata import Metadata
 from mylibrary.traverse_file import FileDelimited
 from mylibrary.traverse_file import FileFixedWidth
-#from mylibrary.traverse_table import Oracle
+from mylibrary.traverse_table import Oracle
 from time import gmtime, strftime
 
 log = logging.getLogger(__name__)
 
-source_type = 'File_DL'
-source_name = 'sampledata_pos10000.csv'
+#source_type = 'File_DL'
+#source_name = 'sampledata_pos10000.csv'
 #source_type = 'File_FW'
 #source_name = 'sampledata_fw.dat'
-#source_type = 'Table'
-#source_name = 'zmt_collections'
-#schema = 'PY'
+source_type = 'Table'
+source_name = 'data_masking'
+schema = 'PY'
 
 if __name__ == '__main__':
 
