@@ -23,7 +23,48 @@
     }
   },
   {
+    "file_name": "sampledata1000.csv",
+    "delimiter": ",",
+    "header_present": "Yes",
+    "header_column_count": "9",
+    "trailer_present": "No",
+    "trailer_column_count": "0",
+    "date_format": "MM/DD/YYYY",
+    "mask_by_column_name": "Yes",
+    "mask_by_column_position": "No",
+    "masking":
+    {
+      "columns":
+      [
+        { "name": "street", "position":0, "type": "Shuffle" },
+        { "name": "city", "position":0, "type": "SubstitutionChar" },
+        { "name": "zip", "position":0, "type": "ShuffleDet" },
+        { "name": "email", "position":0, "type": "SubstitutionChar" }
+      ]
+    }
+  },
+  {
     "file_name": "sampledata_pos.csv",
+    "delimiter": ",",
+    "header_present": "Yes",
+    "header_column_count": "2",
+    "trailer_present": "Yes",
+    "trailer_column_count": "2",
+    "date_format": "MM/DD/YYYY",
+    "mask_by_column_name": "No",
+    "mask_by_column_position": "Yes",
+    "masking":
+    {
+      "columns":
+      [
+        { "name": "", "position": "2", "type": "Shuffle" },
+        { "name": "", "position": "3", "type": "SubstitutionChar" },
+        { "name": "", "position": "6", "type": "Shuffle" }
+      ]
+    }
+  },
+  {
+    "file_name": "sampledata_pos10000.csv",
     "delimiter": ",",
     "header_present": "Yes",
     "header_column_count": "2",

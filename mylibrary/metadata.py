@@ -69,9 +69,14 @@ class Metadata:
                         log.info('Filter: ' + data[record]['filter'])
 
                     for column in range(len(data[record]['masking']['columns'])):
-                        log.info('\tColumn Position: ' +
-                                 str(data[record]['masking']['columns'][column]['position_start']) + ' to ' +
-                                 str(data[record]['masking']['columns'][column]['position_end']))
+                        if self.source_type == 'File_FW':
+                            log.info('\tColumn Position: ' +
+                                     str(data[record]['masking']['columns'][column]['position_start']) + ' to ' +
+                                     str(data[record]['masking']['columns'][column]['position_end']))
+                        else:
+                            log.info('\tColumn Name: ' + data[record]['masking']['columns'][column]['name'])
+                            log.info('\tColumn Position: ' + str(data[record]['masking']['columns'][column]['position']))
+
                         log.info('\t\tMasking Type: ' + data[record]['masking']['columns'][column]['type'])
             log.debug("get_metadata() | <START>")
             return data

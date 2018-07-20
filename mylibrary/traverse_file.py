@@ -33,7 +33,7 @@ class FileDelimited:
 
         # Read File | Data
         with open(self.filename, 'r', newline='') as file_read:
-            rec_count = 0
+            rec_count = itr_count = masked_col_position = 0
 
             # Check if file has header record
             '''snf = csv.Sniffer().has_header(file_read.read(100))
@@ -58,12 +58,19 @@ class FileDelimited:
                     if ((data[metadata_index]['trailer_present'] == 'No') or
                             (data[metadata_index]['trailer_present'] == 'Yes' and rec_count < file_rec_count - 2)):
 
-                        # Loop through each column
-                        for col in range(len(col_names)):
+                        # Loop through masked columns
+                        for mask_col in range(len(data[metadata_index]['masking']['columns'])):
+                            itr_count += 1
 
-                            # Loop through masked columns
-                            for mask_col in range(len(data[metadata_index]['masking']['columns'])):
+                            # Loop through each column
+                            for col in range(masked_col_position, len(col_names)):
+                                itr_count += 1
                                 if col_names[col] == data[metadata_index]['masking']['columns'][mask_col]['name']:
+
+                                    # Track column position of masked columns sequentially for optimization
+                                    masked_col_position = col
+
+                                    # Mask column value
                                     if data[metadata_index]['masking']['columns'][mask_col]['type'] == 'ShuffleDet':
                                         row_write[col_names[col]] = Mask.shuffle_det(row_read[col_names[col]])
                                     elif data[metadata_index]['masking']['columns'][mask_col]['type'] == 'Shuffle':
@@ -71,6 +78,7 @@ class FileDelimited:
                                     elif data[metadata_index]['masking']['columns'][mask_col]['type'] == \
                                             'SubstitutionChar':
                                         row_write[col_names[col]] = Mask.substitution_char(row_read[col_names[col]])
+                                    break
                     else:
                         # Special handling for trailer record
                         col_names_trailer = []
@@ -91,6 +99,7 @@ class FileDelimited:
                     rec_count += 1
                     if (rec_count == file_rec_count - 1) or ((rec_count % 10000) == 0):
                         log.info("# of Records Processed: " + str(rec_count))
+                        log.info("# of Iterations: " + str(itr_count))
 
         log.debug("mask_data_by_col_name() | <END>")
 
@@ -100,7 +109,7 @@ class FileDelimited:
 
         # Read File | Data
         with open(self.filename, 'r', newline='') as file_read:
-            rec_count = 0
+            rec_count = itr_count = masked_col_position = 0
 
             reader = csv.reader(file_read, delimiter=data[metadata_index]['delimiter'])
 
@@ -137,12 +146,19 @@ class FileDelimited:
 
                     else:
 
-                        # Loop through each column
-                        for col in range(len(row_read)):
+                        # Loop through masked columns
+                        for mask_col in range(len(data[metadata_index]['masking']['columns'])):
 
-                            # Loop through masked columns
-                            for mask_col in range(len(data[metadata_index]['masking']['columns'])):
+                            # Loop through each column
+                            for col in range(masked_col_position, len(row_read)):
+                                itr_count += 1
+
                                 if (col + 1) == int(data[metadata_index]['masking']['columns'][mask_col]['position']):
+
+                                    # Track column position of masked columns sequentially for optimization
+                                    masked_col_position = col
+
+                                    # Mask column values
                                     if data[metadata_index]['masking']['columns'][mask_col]['type'] == 'Shuffle':
                                         row_write[col] = Mask.shuffle(row_read[col])
                                     elif data[metadata_index]['masking']['columns'][mask_col]['type'] == 'ShuffleDet':
@@ -150,6 +166,7 @@ class FileDelimited:
                                     elif data[metadata_index]['masking']['columns'][mask_col]['type'] == \
                                             'SubstitutionChar':
                                         row_write[col] = Mask.substitution_char(row_read[col])
+                                    break
 
                     # Skip masking for header record
                     '''elif data[metadata_index]['header_present'] == 'Yes' and rec_count == 0:
@@ -182,6 +199,7 @@ class FileDelimited:
                     rec_count += 1
                     if (rec_count == file_rec_count - 1) or ((rec_count % 10000) == 0):
                         log.info("# of Records Processed: " + str(rec_count))
+                        log.info("# of Iterations: " + str(itr_count))
 
         log.debug("mask_data_by_col_position() | <END>")
 
