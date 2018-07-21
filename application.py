@@ -15,13 +15,13 @@ from time import gmtime, strftime
 
 log = logging.getLogger(__name__)
 
-#source_type = 'File_DL'
-#source_name = 'sampledata_pos10000.csv'
+source_type = 'File_DL'
+source_name = 'sampledata1000.csv'
 #source_type = 'File_FW'
 #source_name = 'sampledata_fw.dat'
-source_type = 'Table'
-source_name = 'data_masking'
-schema = 'PY'
+#source_type = 'Table'
+#source_name = 'data_masking'
+#schema = 'PY'
 
 if __name__ == '__main__':
 
