@@ -60,14 +60,13 @@ class FileDelimited:
 
                         # Loop through masked columns
                         for mask_col in range(len(data[metadata_index]['masking']['columns'])):
-                            itr_count += 1
 
                             # Loop through each column
                             for col in range(masked_col_position, len(col_names)):
                                 itr_count += 1
                                 if col_names[col] == data[metadata_index]['masking']['columns'][mask_col]['name']:
 
-                                    # Track column position of masked columns sequentially for optimization
+                                    # Track position of masked columns sequentially for optimization
                                     masked_col_position = col
 
                                     # Mask column value
@@ -155,7 +154,7 @@ class FileDelimited:
 
                                 if (col + 1) == int(data[metadata_index]['masking']['columns'][mask_col]['position']):
 
-                                    # Track column position of masked columns sequentially for optimization
+                                    # Track position of masked columns sequentially for optimization
                                     masked_col_position = col
 
                                     # Mask column values

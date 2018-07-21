@@ -20,7 +20,8 @@
     {
       "columns":
       [
-        { "name": "LOC_LOCALITY", "position":0, "type": "Shuffle" }
+        { "name": "LOC_LOCALITY", "position":0, "type": "Shuffle" },
+        { "name": "LOC_LATITUDE", "position":0, "type": "Shuffle" }
       ]
     }
   }

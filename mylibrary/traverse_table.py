@@ -100,6 +100,52 @@ class Oracle:
     def mask_data(self, data, metadata_index, table_rec_count):
         """Reads table and creates masked files"""
         log.debug("mask_data() | <START>")
+        rec_count = itr_count = 0
+
+        # Generate header of masked file
+        col_names_write = self.get_column_attributes()
+
+        # Write File | Masked Data
+        with open(self.filename_masked, 'w', newline='') as file_write:
+            writer = csv.DictWriter(file_write, fieldnames=col_names_write, delimiter='|', quoting=csv.QUOTE_ALL)
+            writer.writeheader()
+
+            query = 'SELECT * FROM {schema}.{table} {filter}'.format(schema=self.schema, table=self.table,
+                                                                     filter=data[metadata_index]['filter'])
+            db_cur_one.execute(query)
+
+            # Loop through each record
+            for row_read in db_cur_one:
+                row_write = dict(zip(col_names_write, row_read))
+
+                # Loop through masked columns
+                for col_mask in range(len(data[metadata_index]['masking']['columns'])):
+
+                    itr_count += 1
+
+                    col_mask_name = data[metadata_index]['masking']['columns'][col_mask]['name']
+                    col_mask_type = data[metadata_index]['masking']['columns'][col_mask]['type']
+
+                    # Mask column values
+                    if col_mask_type == 'Shuffle':
+                        row_write[col_mask_name] = Mask.shuffle(row_write[col_mask_name])
+                    elif col_mask_type == 'ShuffleDet':
+                        row_write[col_mask_name] = Mask.shuffle_det(row_write[col_mask_name])
+                    elif col_mask_type == 'SubstitutionChar':
+                        row_write[col_mask_name] = Mask.substitution_char(row_write[col_mask_name])
+
+                log.debug(row_write)
+                writer.writerow(row_write)
+                rec_count += 1
+                if (rec_count == table_rec_count) or ((rec_count % 10000) == 0):
+                    log.info("# of Records Processed: " + str(rec_count))
+                    log.info("# of Iterations: " + str(itr_count))
+
+        log.debug("mask_data() | <END>")
+
+    '''def mask_data(self, data, metadata_index, table_rec_count):
+        """Reads table and creates masked files"""
+        log.debug("mask_data() | <START>")
         rec_count = itr_count = masked_col_position = 0
         row_write = {}
 
@@ -117,21 +163,24 @@ class Oracle:
 
             # Loop through each record
             for row_read in db_cur_one:
+                print(row_read)
 
                 # Loop through masked columns
                 for col_mask in range(len(data[metadata_index]['masking']['columns'])):
 
                     # Loop through each column
                     for col_read in range(masked_col_position, len(col_names_write)):
+
+                        itr_count += 1
+
                         col_value = str.strip(str(row_read[col_read]))
                         row_write[col_names_write[col_read]] = col_value
 
-                        itr_count += 1
                         if col_names_write[col_read] == \
                                 str.strip(str(data[metadata_index]['masking']['columns'][col_mask]['name'])):
 
-                            # Track column position of masked columns sequentially for optimization
-                            masked_col_position = col_read
+                            # Track position of masked columns sequentially for optimization
+                            #masked_col_position = col_read
 
                             # Mask column values
                             if data[metadata_index]['masking']['columns'][col_mask]['type'] == 'Shuffle':
@@ -140,7 +189,7 @@ class Oracle:
                                 row_write[col_names_write[col_read]] = Mask.shuffle_det(col_value)
                             elif data[metadata_index]['masking']['columns'][col_mask]['type'] == 'SubstitutionChar':
                                 row_write[col_names_write[col_read]] = Mask.substitution_char(col_value)
-                            break
+                            #break
 
                 log.debug(row_write)
                 writer.writerow(row_write)
@@ -149,4 +198,4 @@ class Oracle:
                     log.info("# of Records Processed: " + str(rec_count))
                     log.info("# of Iterations: " + str(itr_count))
 
-        log.debug("mask_data() | <END>")
+        log.debug("mask_data() | <END>")'''
