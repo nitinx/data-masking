@@ -133,6 +133,8 @@ class Oracle:
                         row_write[col_mask_name] = Mask.shuffle_det(row_write[col_mask_name])
                     elif col_mask_type == 'SubstitutionChar':
                         row_write[col_mask_name] = Mask.substitution_char(row_write[col_mask_name])
+                    elif col_mask_type == 'SubstitutionCharDet':
+                        row_write[col_mask_name] = Mask.substitution_char_det(row_write[col_mask_name])
 
                 log.debug(row_write)
                 writer.writerow(row_write)

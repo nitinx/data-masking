@@ -10,7 +10,7 @@ import logging
 from mylibrary.metadata import Metadata
 from mylibrary.traverse_file import FileDelimited
 from mylibrary.traverse_file import FileFixedWidth
-from mylibrary.traverse_table import Oracle
+#from mylibrary.traverse_table import Oracle
 from time import gmtime, strftime
 
 log = logging.getLogger(__name__)

@@ -39,7 +39,7 @@
         { "name": "street", "position":0, "type": "Shuffle" },
         { "name": "city", "position":0, "type": "SubstitutionChar" },
         { "name": "zip", "position":0, "type": "ShuffleDet" },
-        { "name": "email", "position":0, "type": "SubstitutionChar" }
+        { "name": "email", "position":0, "type": "SubstitutionCharDet" }
       ]
     }
   },

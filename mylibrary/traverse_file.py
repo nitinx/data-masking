@@ -142,7 +142,10 @@ class FileDelimited:
                                     elif data[metadata_index]['masking']['columns'][mask_col]['type'] == \
                                             'SubstitutionChar':
                                         row_write[col_names[col]] = Mask.substitution_char(row_read[col_names[col]])
-                                    break
+                                    elif data[metadata_index]['masking']['columns'][mask_col]['type'] == \
+                                            'SubstitutionCharDet':
+                                        row_write[col_names[col]] = Mask.substitution_char_det(row_read[col_names[col]])
+                                    #break
                     else:
                         # Special handling for trailer record
                         col_names_trailer = []
@@ -230,6 +233,9 @@ class FileDelimited:
                                     elif data[metadata_index]['masking']['columns'][mask_col]['type'] == \
                                             'SubstitutionChar':
                                         row_write[col] = Mask.substitution_char(row_read[col])
+                                    elif data[metadata_index]['masking']['columns'][mask_col]['type'] == \
+                                            'SubstitutionCharDet':
+                                        row_write[col] = Mask.substitution_char_det(row_read[col])
                                     break
 
                     # Skip masking for header record
@@ -358,6 +364,9 @@ class FileFixedWidth:
                                     elif data[metadata_index]['masking']['columns'][mask_col]['type'] == \
                                             'SubstitutionChar':
                                         row_write[col] = Mask.substitution_char(row_read[col])
+                                    elif data[metadata_index]['masking']['columns'][mask_col]['type'] == \
+                                            'SubstitutionCharDet':
+                                        row_write[col] = Mask.substitution_char_det(row_read[col])
 
                     log.debug(row_write)
                     writer.writerow(row_write)

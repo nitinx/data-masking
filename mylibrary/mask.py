@@ -2,6 +2,7 @@
 
 import logging
 import random
+import string
 
 log = logging.getLogger(__name__)
 
@@ -9,8 +10,18 @@ log = logging.getLogger(__name__)
 class Mask:
 
     def substitution_char(self, value_org):
-        """Deterministic Character Substitution"""
+        """Random Character Substitution"""
         log.debug("substitution_char() | <START>")
+
+        data_set = string.ascii_uppercase + string.digits + string.ascii_lowercase
+        value_msk = ''.join(random.choice(data_set) for x in range(len(value_org)))
+
+        log.debug("substitution_char() | <END>")
+        return value_msk
+
+    def substitution_char_det(self, value_org):
+        """Deterministic Character Substitution"""
+        log.debug("substitution_char_det() | <START>")
 
         value_msk = ''
 
@@ -45,7 +56,7 @@ class Mask:
             value_msk += chr(value_asc)
 
         log.debug(value_org + ' --> ' + value_msk)
-        log.debug("substitution_char() | <END>")
+        log.debug("substitution_char_det() | <END>")
         return value_msk
 
     def shuffle(self, value_org):
