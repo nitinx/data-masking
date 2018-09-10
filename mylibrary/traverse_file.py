@@ -131,8 +131,10 @@ class FileDelimited:
                                 itr_count += 1
                                 if col_names[col] == data[metadata_index]['masking']['columns'][mask_col]['name']:
 
-                                    # Track position of masked columns sequentially for optimization
-                                    masked_col_position = col
+                                    # REVISIT -Track position of masked columns sequentially for optimization
+                                    # Amended to track position of first column to be masked only
+                                    if masked_col_position == 0:
+                                        masked_col_position = col
 
                                     # Mask column value
                                     if data[metadata_index]['masking']['columns'][mask_col]['type'] == 'ShuffleDet':
