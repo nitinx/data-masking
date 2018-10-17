@@ -63,11 +63,11 @@ class Mask:
         """Random Shuffle"""
         log.debug("shuffle_random() | <START>")
 
-        shuffle_list = list(value_org)
+        shuffle_list = list(str(value_org))
         random.shuffle(shuffle_list)
         value_msk = ''.join(shuffle_list)
 
-        log.debug(value_org + ' --> ' + value_msk)
+        log.debug(str(value_org) + ' --> ' + value_msk)
         log.debug("shuffle_random() | <END>")
         return value_msk
 
@@ -75,10 +75,10 @@ class Mask:
         """Deterministic Shuffle"""
         log.debug("shuffle_det() | <START>")
 
-        shuffle_list = list(value_org)
+        shuffle_list = list(str(value_org))
         random.Random(4).shuffle(shuffle_list)
         value_msk = ''.join(shuffle_list)
 
-        log.debug(value_org + ' --> ' + value_msk)
+        log.debug(str(value_org) + ' --> ' + value_msk)
         log.debug("shuffle_det() | <END>")
         return value_msk

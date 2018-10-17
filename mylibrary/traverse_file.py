@@ -147,7 +147,7 @@ class FileDelimited:
                                     elif data[metadata_index]['masking']['columns'][mask_col]['type'] == \
                                             'SubstitutionCharDet':
                                         row_write[col_names[col]] = Mask.substitution_char_det(row_read[col_names[col]])
-                                    #break
+                                    break
                     else:
                         # Special handling for trailer record
                         col_names_trailer = []
