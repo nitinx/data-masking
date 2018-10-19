@@ -2,7 +2,7 @@
 
 """Traverse File FixedWidth Library
 Library that:
-1. Masks fixed-width files column positions
+1. Masks fixed-width files by column position
 """
 
 import csv
@@ -29,89 +29,66 @@ class FileFixedWidth:
         return i + 1
 
     def convert_to_dl(self, data, metadata_index, file_rec_count):
-        """Converts file layout from delimited --> fixed width"""
+        """Converts file layout from fixed width --> delimited"""
         log.debug("convert_to_dl() | <START>")
 
         # Read File | Data
         with open(self.filename, 'r', newline='') as file_read:
-            rec_count = 0
-            row_list = []
+            rec_count = itr_count = 0
 
+            # Loop through each record
             for row in file_read:
-                print(row)
+                row_list = []
 
-                row_list = row[0:int(data[metadata_index]['masking']['columns'][0]['position_start'])]
-                print(row_list)
+                # Skip masking for header/trailer record(s)
+                if ((data[metadata_index]['header_present'] == 'Yes' and rec_count == 0) or
+                        (data[metadata_index]['trailer_present'] == 'Yes' and rec_count == file_rec_count - 1)):
+                    row_list.append(row[:])
 
-                #for columns in range(len(data[metadata_index]['masking']['columns']) + 2):
-                    #print(str(columns) + ': ' + row[2:5])
+                else:
+                    # If first column to be masked does not start at position 0
+                    if int(data[metadata_index]['masking']['columns'][0]['position_start']) > 0:
+                        row_list.append(row[0:int(data[metadata_index]['masking']['columns'][0]['position_start']) - 1])
+                        print(row_list)
 
+                    # Loop through record and create a list of columns
+                    for columns in range(len(data[metadata_index]['masking']['columns'])):
+                        print(columns)
+                        itr_count += 1
+                        itr_col_type = data[metadata_index]['masking']['columns'][columns]['type']
+                        itr_col_pos_start = int(data[metadata_index]['masking']['columns'][columns]
+                                                ['position_start']) - 1
+                        itr_col_pos_end = int(data[metadata_index]['masking']['columns'][columns]['position_end']) - 1
 
+                        # Mask column values
+                        if itr_col_type == 'Shuffle':
+                            row_list.append(Mask.shuffle(row[itr_col_pos_start:itr_col_pos_end]))
+                        elif itr_col_type == 'ShuffleDet':
+                            row_list.append(Mask.shuffle_det(row[itr_col_pos_start:itr_col_pos_end]))
+                        elif itr_col_type == 'SubstitutionChar':
+                            row_list.append(Mask.substitution_char(row[itr_col_pos_start:itr_col_pos_end]))
+                        elif itr_col_type == 'SubstitutionCharDet':
+                            row_list.append(Mask.substitution_char_det(row[itr_col_pos_start:itr_col_pos_end]))
+                        print(row_list)
 
-    def mask_data(self, data, metadata_index, file_rec_count):
-        """Masks file data by column position"""
-        log.debug("mask_data() | <START>")
-
-        # Read File | Data
-        with open(self.filename, 'r', newline='') as file_read:
-            rec_count = 0
-
-            reader = csv.reader(file_read, delimiter=data[metadata_index]['delimiter'])
-
-            # Write File | Masked Data
-            with open(self.filename_masked, 'w', newline='') as file_write:
-                writer = csv.writer(file_write, delimiter=data[metadata_index]['delimiter'])
-
-                # Loop through each record
-                for row_read in reader:
-                    row_write = row_read
-
-                    # Mask Detail Records
-                    '''if ((data[metadata_index]['trailer_present'] == 'No') or
-                            (data[metadata_index]['trailer_present'] == 'Yes' and rec_count < file_rec_count - 1)):'''
-
-                    # Skip masking for header/trailer record(s)
-                    if ((data[metadata_index]['header_present'] == 'Yes' and rec_count == 0) or
-                            (data[metadata_index]['trailer_present'] == 'Yes' and rec_count == file_rec_count - 1)):
-                        if data[metadata_index]['header_present'] == 'Yes' and rec_count == 0:
-                            rec_type = 'header'
+                        if columns < len(data[metadata_index]['masking']['columns']) - 1:
+                            itr_col_nxt_pos_start = int(data[metadata_index]['masking']['columns'][columns + 1]
+                                                        ['position_start']) - 1
+                            if itr_col_nxt_pos_start - itr_col_pos_end > 1:
+                                row_list.append(row[itr_col_pos_end:itr_col_nxt_pos_start])
+                                print(row_list)
                         else:
-                            rec_type = 'trailer'
+                            if len(row[itr_col_pos_end:]) > 0:
+                                row_list.append(row[itr_col_pos_end:])
+                                print(row_list)
 
-                        log.info('Processing ' + str.upper(rec_type) + ' Record...')
-                        row_write = []
+                        # ON ADDITION of below, iteration is misbehaving
+                        #row = ''.join(row_list)
+                        #print(row)
 
-                        # Loop through trailer columns
-                        for col in range(int(data[metadata_index][rec_type + '_column_count'])):
-                            row_write.append(row_read[col])
+                rec_count += 1
+                if (rec_count == file_rec_count - 1) or ((rec_count % 10000) == 0):
+                    log.info("# of Records Processed: " + str(rec_count))
+                    log.info("# of Iterations: " + str(itr_count))
 
-                        # Reinitialize writer for header column names
-                        writer = csv.writer(file_write, delimiter=data[metadata_index]['delimiter'],
-                                            quoting=csv.QUOTE_NONE)
-
-                    else:
-
-                        # Loop through each column
-                        for col in range(len(row_read)):
-
-                            # Loop through masked columns
-                            for mask_col in range(len(data[metadata_index]['masking']['columns'])):
-                                if (col + 1) == int(data[metadata_index]['masking']['columns'][mask_col]['position']):
-                                    if data[metadata_index]['masking']['columns'][mask_col]['type'] == 'Shuffle':
-                                        row_write[col] = Mask.shuffle(row_read[col])
-                                    if data[metadata_index]['masking']['columns'][mask_col]['type'] == 'ShuffleDet':
-                                        row_write[col] = Mask.shuffle_det(row_read[col])
-                                    elif data[metadata_index]['masking']['columns'][mask_col]['type'] == \
-                                            'SubstitutionChar':
-                                        row_write[col] = Mask.substitution_char(row_read[col])
-                                    elif data[metadata_index]['masking']['columns'][mask_col]['type'] == \
-                                            'SubstitutionCharDet':
-                                        row_write[col] = Mask.substitution_char_det(row_read[col])
-
-                    log.debug(row_write)
-                    writer.writerow(row_write)
-                    rec_count += 1
-                    if (rec_count == file_rec_count - 1) or ((rec_count % 10000) == 0):
-                        log.info("# of Records Processed: " + str(rec_count))
-
-        log.debug("mask_data() | <END>")
+        log.debug("convert_to_dl() | <END>")
