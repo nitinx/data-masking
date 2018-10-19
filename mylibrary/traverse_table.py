@@ -2,7 +2,10 @@
 
 """Traverse Table Library
 Library that:
-1. Traverses 
+1. Oracle | Gets Column Count (for table to be masked)
+2. Oracle | Gets Column Attributes (for table to be masked)
+3. Oracle | Gets Candidate Record Count (for table to be masked)
+4. Oracle | Masks table data and writes to CSV file
 """
 
 import csv

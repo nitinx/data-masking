@@ -2,6 +2,8 @@
 
 """File Metadata Library
 Library that:
+1. Gets index # of object to be masked from metadata
+2. Gets metadata and logs details
 """
 
 import json

@@ -2,6 +2,9 @@
 
 """Traverse File Library
 Library that:
+1. Masks delimited files - driven by column names
+2. Masks delimited files - driven by column positions
+3. Masks fixed-width files column positions
 """
 
 import csv
@@ -92,9 +95,9 @@ class FileDelimited:
 
         log.debug("mask_data_by_col_name() | <END>")'''
 
-    def mask_data_by_col_name(self, data, metadata_index, file_rec_count):
-        """Masks file data by column name"""
-        log.debug("mask_data_by_col_name() | <START>")
+    def mask_by_col_name(self, data, metadata_index, file_rec_count):
+        """Mask delimited file - driven by column name"""
+        log.debug("mask_by_col_name() | <START>")
 
         # Read File | Data
         with open(self.filename, 'r', newline='') as file_read:
@@ -170,11 +173,11 @@ class FileDelimited:
                         log.info("# of Records Processed: " + str(rec_count))
                         log.info("# of Iterations: " + str(itr_count))
 
-        log.debug("mask_data_by_col_name() | <END>")
+        log.debug("mask_by_col_name() | <END>")
 
-    def mask_data_by_col_position(self, data, metadata_index, file_rec_count):
-        """Masks file data by column position"""
-        log.debug("mask_data_by_col_position() | <START>")
+    def mask_by_col_position(self, data, metadata_index, file_rec_count):
+        """Mask delimited file - driven by column position"""
+        log.debug("mask_by_col_position() | <START>")
 
         # Read File | Data
         with open(self.filename, 'r', newline='') as file_read:
@@ -273,7 +276,7 @@ class FileDelimited:
                         log.info("# of Records Processed: " + str(rec_count))
                         log.info("# of Iterations: " + str(itr_count))
 
-        log.debug("mask_data_by_col_position() | <END>")
+        log.debug("mask_by_col_position() | <END>")
 
 
 class FileFixedWidth:

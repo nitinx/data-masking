@@ -8,20 +8,20 @@ Application that:
 
 import logging
 from mylibrary.metadata import Metadata
-from mylibrary.traverse_file import FileDelimited
-from mylibrary.traverse_file import FileFixedWidth
-from mylibrary.traverse_table import Oracle
+from mylibrary.traverse_file_dl import FileDelimited
+from mylibrary.traverse_file_fw import FileFixedWidth
+#from mylibrary.traverse_table import Oracle
 from time import gmtime, strftime
 
 log = logging.getLogger(__name__)
 
-#source_type = 'File_DL'
-#source_name = 'sampledata1000.csv'
+source_type = 'File_DL'
+source_name = 'sampledata_pos10000.csv'
 #source_type = 'File_FW'
 #source_name = 'sampledata_fw.dat'
-source_type = 'Table'
-source_name = 'zmt_collections'
-schema = 'PY'
+#source_type = 'Table'
+#source_name = 'zmt_collections'
+#schema = 'PY'
 
 if __name__ == '__main__':
 
@@ -50,9 +50,9 @@ if __name__ == '__main__':
         # Read and Write File | Delimited
         FileDelimited = FileDelimited(source_name)
         if data[metadata_index]['mask_by_column_name'] == 'Yes':
-            FileDelimited.mask_data_by_col_name(data, metadata_index, FileDelimited.record_count())
+            FileDelimited.mask_by_col_name(data, metadata_index, FileDelimited.record_count())
         else:
-            FileDelimited.mask_data_by_col_position(data, metadata_index, FileDelimited.record_count())
+            FileDelimited.mask_by_col_position(data, metadata_index, FileDelimited.record_count())
     elif source_type == 'File_FW':
         # Read and Write File | Fixed Width
         FileFixedWidth = FileFixedWidth(source_name)

@@ -17,8 +17,7 @@
         { "name": "city", "position":0, "type": "SubstitutionChar" },
         { "name": "zip", "position":0, "type": "ShuffleDet" },
         { "name": "email", "position":0, "type": "SubstitutionChar" },
-        { "name": "telno", "position":0, "type": "SubstitutionChar" },
-        { "name": "ssn", "position":0, "type": "SubstitutionChar" }
+        { "name": "telno", "position":0, "type": "SubstitutionChar" }
       ]
     }
   },
