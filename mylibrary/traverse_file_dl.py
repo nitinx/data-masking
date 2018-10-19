@@ -2,8 +2,9 @@
 
 """Traverse File Library
 Library that:
-1. Masks delimited files - driven by column names
-2. Masks delimited files - driven by column positions
+1. Gets record count in delimited files
+2. Masks delimited files - driven by column names
+3. Masks delimited files - driven by column positions
 """
 
 import csv

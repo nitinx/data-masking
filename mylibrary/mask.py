@@ -1,4 +1,12 @@
-# 04 May 2018 | Masking Library
+# 04 May 2018 | Masking Routines Library
+
+"""Masking Routines Library
+Library that:
+1. Masks strings by Character Substitution - Random
+2. Masks strings by Character Substitution - Deterministic
+3. Masks strings by Character Shuffling - Random
+4. Masks strings by Character Shuffling - Deterministic
+"""
 
 import logging
 import random

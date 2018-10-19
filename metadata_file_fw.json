@@ -15,5 +15,22 @@
         { "position_start": 26, "position_end": 33, "type": "SubstitutionChar" }
       ]
     }
+  },
+  {
+    "file_name": "sampledata_fw10000.dat",
+    "header_present": "Yes",
+    "header_column_count": "2",
+    "trailer_present": "Yes",
+    "trailer_column_count": "2",
+    "date_format": "MM/DD/YYYY",
+    "record_length": 47,
+    "masking":
+    {
+      "columns":
+      [
+        { "position_start": 2, "position_end": 10, "type": "Shuffle" },
+        { "position_start": 26, "position_end": 33, "type": "SubstitutionChar" }
+      ]
+    }
   }
 ]
