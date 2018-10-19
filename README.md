@@ -24,11 +24,12 @@ Installation
 ------------
 This process is currently manual and involves the following steps:
 
-    1. Copy over the .py files to the appropriate folders
-    2. Place the delimited/fixed-width files in the folder containing application.py
-	3. If Oracle masking functionality is to be leveraged, path to key file (Line #9) in db_oracle.py should be edited as appropriate. 
+1. Copy over the .py files to the appropriate folders
+2. Place the delimited/fixed-width files in the folder containing application.py
+3. If Oracle masking functionality is to be leveraged, path to key file (Line #9) in db_oracle.py should be edited as appropriate. 
+
 ```	
-	Format of oracle.key file:
+Format of oracle.key file:
        [
 	     {
 		   "USER": "<PLACEHOLDER>",
@@ -41,11 +42,9 @@ This process is currently manual and involves the following steps:
 Usage Instructions
 ------------
 Update the .json files and furnish the details of the files/tables to be masked. Samples provided below:
-```
-Delimited Files: metadata_file_dl.json
 
-  - By Column Names
-  
+Delimited Files [mask by column names]: metadata_file_dl.json
+```
   [
     {
       "file_name": "sampledata.csv",
@@ -70,9 +69,10 @@ Delimited Files: metadata_file_dl.json
       }
     }
   ]
-  
-  - By Column Positions
-  
+```  
+
+Delimited Files [mask by column positions]: metadata_file_dl.json
+```  
   [
     {
       "file_name": "sampledata_pos.csv",
@@ -95,9 +95,10 @@ Delimited Files: metadata_file_dl.json
       }
     }
   ]
+```
 
 Fixed-width Files: metadata_file_fw.json
-
+```
   [
     {
       "file_name": "sampledata_fw.dat",
@@ -117,9 +118,10 @@ Fixed-width Files: metadata_file_fw.json
       }
     }
   ] 
+```
   
 Oracle Tables: metadata_table.json
-
+```
   [
     {
       "table_name": "zmt_collections",
