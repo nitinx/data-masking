@@ -143,3 +143,7 @@ In the Backlog
 1. Additional masking routines
 2. Detailed Statistics
 3. Visualization & Notifications
+
+## License
+
+[![CC0](https://licensebuttons.net/p/zero/1.0/88x31.png)](https://creativecommons.org/publicdomain/zero/1.0/)
