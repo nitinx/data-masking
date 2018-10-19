@@ -40,7 +40,7 @@ This process is currently manual and involves the following steps:
 Usage Instructions
 ------------
 Update the .json files and furnish the details of the files/tables to be masked. Samples provided below:
-
+```
 Delimited Files: metadata_file_dl.json
 
   - By Column Names
@@ -134,7 +134,7 @@ Oracle Tables: metadata_table.json
       }
     }
   ]
-
+```
   
 
 In the Backlog
