@@ -44,7 +44,7 @@ Update the .json files and furnish the details of the files/tables to be masked.
 Delimited Files: metadata_file_dl.json
 
   - By Column Names
-  
+  [
     {
       "file_name": "sampledata.csv",
       "delimiter": ",",
@@ -66,10 +66,11 @@ Delimited Files: metadata_file_dl.json
           { "name": "telno", "position":0, "type": "SubstitutionChar" }
         ]
       }
-    },
+    }
+  ]
   
   - By Column Positions
-  
+  [
     {
       "file_name": "sampledata_pos.csv",
       "delimiter": ",",
@@ -89,45 +90,46 @@ Delimited Files: metadata_file_dl.json
           { "name": "", "position": "6", "type": "Shuffle" }
         ]
       }
-    },
-  
+    }
+  ]
 
 Fixed-width Files: metadata_file_fw.json
-
-  {
-    "file_name": "sampledata_fw.dat",
-    "header_present": "Yes",
-    "header_column_count": "2",
-    "trailer_present": "Yes",
-    "trailer_column_count": "2",
-    "date_format": "MM/DD/YYYY",
-    "record_length": 47,
-    "masking":
+  [
     {
-      "columns":
-      [
-        { "position_start": 2, "position_end": 10, "type": "Shuffle" },
-        { "position_start": 26, "position_end": 33, "type": "SubstitutionChar" }
-      ]
+      "file_name": "sampledata_fw.dat",
+      "header_present": "Yes",
+      "header_column_count": "2",
+      "trailer_present": "Yes",
+      "trailer_column_count": "2",
+      "date_format": "MM/DD/YYYY",
+      "record_length": 47,
+      "masking":
+      {
+        "columns":
+        [
+          { "position_start": 2, "position_end": 10, "type": "Shuffle" },
+          { "position_start": 26, "position_end": 33, "type": "SubstitutionChar" }
+        ]
+      }
     }
-  },
-  
+  ] 
   
 Oracle Tables: metadata_table.json
-
-  {
-    "table_name": "zmt_collections",
-    "schema": "PY",
-    "filter": "WHERE PERIOD = '201805'",
-    "masking":
+  [
     {
-      "columns":
-      [
-        { "name": "COLLECTION_ID", "position":0, "type": "Shuffle" },
-        { "name": "TITLE", "position":0, "type": "SubstitutionChar" }
-      ]
+      "table_name": "zmt_collections",
+      "schema": "PY",
+      "filter": "WHERE PERIOD = '201805'",
+      "masking":
+      {
+        "columns":
+        [
+          { "name": "COLLECTION_ID", "position":0, "type": "Shuffle" },
+          { "name": "TITLE", "position":0, "type": "SubstitutionChar" }
+        ]
+      }
     }
-  },
+  ]
 
   
 
