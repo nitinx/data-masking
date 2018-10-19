@@ -44,6 +44,7 @@ Update the .json files and furnish the details of the files/tables to be masked.
 Delimited Files: metadata_file_dl.json
 
   - By Column Names
+  
   [
     {
       "file_name": "sampledata.csv",
@@ -70,6 +71,7 @@ Delimited Files: metadata_file_dl.json
   ]
   
   - By Column Positions
+  
   [
     {
       "file_name": "sampledata_pos.csv",
@@ -94,6 +96,7 @@ Delimited Files: metadata_file_dl.json
   ]
 
 Fixed-width Files: metadata_file_fw.json
+
   [
     {
       "file_name": "sampledata_fw.dat",
@@ -115,6 +118,7 @@ Fixed-width Files: metadata_file_fw.json
   ] 
   
 Oracle Tables: metadata_table.json
+
   [
     {
       "table_name": "zmt_collections",
