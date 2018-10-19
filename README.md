@@ -27,7 +27,7 @@ This process is currently manual and involves the following steps:
     1. Copy over the .py files to the appropriate folders
     2. Place the delimited/fixed-width files in the folder containing application.py
 	3. If Oracle masking functionality is to be leveraged, path to key file (Line #9) in db_oracle.py should be edited as appropriate. 
-	
+```	
 	Format of oracle.key file:
        [
 	     {
@@ -36,6 +36,7 @@ This process is currently manual and involves the following steps:
 		   "CONNECT_STRING": "<PLACEHOLDER>"
 	     }
        ]
+```
 
 Usage Instructions
 ------------
