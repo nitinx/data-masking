@@ -1,6 +1,7 @@
 # Data Masker
 
-
+Overview
+------------
 An application to mask sensitive data in flat files/Oracle Tables. Current features:
 
 Masking Options:
