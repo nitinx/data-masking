@@ -51,7 +51,7 @@ Temporary Items
 *.gz
 
 # Data files
-.dat
-.csv
+*.dat
+*.csv
 
 
