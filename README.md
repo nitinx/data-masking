@@ -1,33 +1,41 @@
 # Data Masker
 
-Overview
-------------
-An application to mask sensitive data in flat files/Oracle Tables. Current features:
+### Overview
+To enable quality test data in lower environments, there is a need bring down datasets from production. However, the datasets contain Personally identifiable information (PII) and would need to be masked before copying them over. A cofigurable app was required for this purpose.
 
-Masking Options:
-1. Mask delimited files
+#### Masking Options:
+1. Delimited files
    - by column names
    - by column positions
-2. Mask fixed-width files by column positions
-3. Mask Oracle Relational Tables and generate masked delimited file
+2. Fixed-width files by column positions
+3. Oracle Relational Tables (generates masked delimited file)
 
-Masking Routines:
+#### Masking Routines:
 1. Character Substitution - Random
 2. Character Substitution - Deterministic
 3. Character Shuffling - Random
 4. Character Shuffling - Deterministic
 
-Pre-Requisites
-------------
-1. Installation of Oracle DB - if Oracle table masking is to be used.
+### Pre-Requisites
 
-Installation
-------------
-This process is currently manual and involves the following steps:
+1. Configure Oracle keys (if Oracle masking is required).
+2. Setup metadata for masking.
 
-1. Copy over the .py files to the appropriate folders
-2. Place the delimited/fixed-width files in the folder containing application.py
-3. If Oracle masking functionality is to be leveraged, path to key file (Line #9) in db_oracle.py should be edited as appropriate. 
+### Code
+
+Seven Python files:
+
+- `application.py`: Main application script.
+- `db_oracle.py`: Module | Oracle connectivity.
+- `mask.py`: Module | Retrieves metadata for masking.
+- `metadata.py`: Module | Retrieves metadata for masking.
+- `traverse_file_dl.py`: Module | Traverses delimited files. 
+- `traverse_file_fw.py`: Module | Traverses fixed-width files.
+- `traverse_table.py`: Module | Traverses Oracle relational tables.
+
+### Configuration Files
+
+If Oracle masking functionality is to be leveraged, create an Oracle key file in the format specified below:  
 
 ```	
 Format of oracle.key file:
@@ -40,9 +48,17 @@ Format of oracle.key file:
        ]
 ```
 
-Usage Instructions
-------------
-Update the .json files and furnish the details of the files/tables to be masked. Samples provided below:
+### Metadata Files [JSON format]
+
+Three JSONs:
+
+- `metadata_file_dl.json`: Metadata for delimited files.
+- `metadata_file_fw.json`: Metadata for fixed-width files.
+- `metadata_table.json`: Metadata for relational tables.
+
+### Usage Instructions
+
+Update JSONs and furnish the details of objects to be masked. Samples provided below:
 
 Delimited Files [mask by column names]: metadata_file_dl.json
 ```
@@ -141,8 +157,7 @@ Oracle Tables: metadata_table.json
 ```
   
 
-In the Backlog
-------------
+### Backlog
 1. Additional masking routines
 2. Detailed Statistics
 3. Visualization & Notifications
